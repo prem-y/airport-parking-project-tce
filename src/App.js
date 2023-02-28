@@ -7,18 +7,6 @@ function App() {
   return (
     <>
       <div id="app" className="generic">
-        {/* <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Appheader/>}></Route>
-            </Routes>
-            </BrowserRouter> */}
-        {/* <div className="content">
-              <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Homepage/>}></Route>
-              </Routes>
-              </BrowserRouter>
-            </div> */}
         <header>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="/">
