@@ -1,6 +1,30 @@
 import React from "react";
-
+import {useState} from "react";
 const SearchForm =()=>{
+    const [departureAirport,setDepartureAirport] = useState('Mangaluru');
+    const [parkingCheckIn,setparkingCheckIn] = useState('');
+    const [parkingCheckOut,setparkingCheckOut] = useState('');
+
+    const departureAirportHandler=(e)=>{
+      const {value} = e.target;
+      setDepartureAirport(value);
+    }
+    const parkingCheckInHandler = (e)=>{
+      const {value}  = e.target;
+      setparkingCheckIn(value);
+    }
+    const parkingCheckOutHandler = (e) =>{
+      const {value} = e.target;
+      setparkingCheckOut(value);
+    }
+
+    const onSubmitHandler = (e) =>{
+      e.preventDefault();
+      console.log('Data Entered:');
+      console.log(departureAirport);
+      console.log(parkingCheckIn);
+      console.log(parkingCheckOut);
+    }
     return(
         <section
               id="hero"
@@ -51,6 +75,8 @@ const SearchForm =()=>{
                             type="text"
                             placeholder="Departure Airport"
                             className="placeholder placeholder-airport"
+                            onChange={departureAirportHandler}
+                            value = {departureAirport}
                           />
                         </div>{" "}
                         <i className="fas fa-map-marker-alt input-icon"></i>
@@ -65,6 +91,8 @@ const SearchForm =()=>{
                               placeholder="Parking Check-Out"
                               className="placeholder placeholder-airport"
                               style={{ width: "100%" }}
+                              value = {parkingCheckIn}
+                              onChange={parkingCheckInHandler}
                             />
                           </div>
                         </label>{" "}
@@ -76,6 +104,8 @@ const SearchForm =()=>{
                             placeholder="Parking Check-Out"
                             className="placeholder placeholder-airport"
                             style={{ width: "100%" }}
+                            value={parkingCheckOut}
+                            onChange={parkingCheckOutHandler}
                           />
                         </label>
                       </div>
@@ -86,6 +116,7 @@ const SearchForm =()=>{
                         <button
                           type="submit"
                           className="btn btn-secondary btn-big btn-block p-2"
+                          onClick={onSubmitHandler}
                         >
                           <span>SEARCH</span>
                         </button>
