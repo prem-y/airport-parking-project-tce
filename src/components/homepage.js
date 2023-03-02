@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../components/header";
-import Footer from "../components/footer";
-import SearchForm from "../components/searchform";
+import Header from "./Header";
+import Footer from "./Footer";
+import SearchForm from "./searchform";
 import "../App.css";
 function Homepage() {
   return (
