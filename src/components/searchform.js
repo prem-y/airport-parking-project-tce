@@ -1,17 +1,33 @@
 import React from "react";
 import {useState} from "react";
 const SearchForm =()=>{
-    const [departureAirport,setDepartureAirport] = useState('Mangaluru');
+    const [departureAirport,setDepartureAirport] = useState('');
     const [parkingCheckIn,setparkingCheckIn] = useState('');
     const [parkingCheckOut,setparkingCheckOut] = useState('');
+
+    const [error,setError] = useState(
+      {
+        departureAirport:false,
+        parkingCheckIn:false,
+        parkingCheckOut:false
+      }
+    )
 
     const departureAirportHandler=(e)=>{
       const {value} = e.target;
       setDepartureAirport(value);
+      if(e.target.value==null)
+      {
+        setError((err)=>({...err,departureAirport:false}))
+      }
     }
     const parkingCheckInHandler = (e)=>{
       const {value}  = e.target;
       setparkingCheckIn(value);
+      if(e.target.value)
+      {
+        setError((err)=>({...err,departureAirportHandler:false}))
+      }
     }
     const parkingCheckOutHandler = (e) =>{
       const {value} = e.target;
@@ -20,6 +36,18 @@ const SearchForm =()=>{
 
     const onSubmitHandler = (e) =>{
       e.preventDefault();
+      if(departureAirport && parkingCheckIn && parkingCheckOut)
+      {
+        alert('Form has been submitted successfully 👍')
+      }
+      else{
+        setError({
+          departureAirport: !departureAirport,
+          parkingCheckIn: !parkingCheckIn,
+          parkingCheckOut: !parkingCheckOut,
+        })
+        
+      }
       console.log('Data Entered:');
       console.log(departureAirport);
       console.log(parkingCheckIn);
@@ -78,6 +106,9 @@ const SearchForm =()=>{
                             onChange={departureAirportHandler}
                             value = {departureAirport}
                           />
+                          {(error.departureAirport)?
+                          <h2>Invalid</h2>
+                          :null}
                         </div>{" "}
                         <i className="fas fa-map-marker-alt input-icon"></i>
                       </label>
@@ -94,6 +125,9 @@ const SearchForm =()=>{
                               value = {parkingCheckIn}
                               onChange={parkingCheckInHandler}
                             />
+                            {(error && error.parkingCheckIn)?
+                          <h3>Invalid Parking Check-In</h3>
+                          :null}
                           </div>
                         </label>{" "}
                         <label className="col-sm-6 p-0 pl-sm-0 date_input">
@@ -107,6 +141,9 @@ const SearchForm =()=>{
                             value={parkingCheckOut}
                             onChange={parkingCheckOutHandler}
                           />
+                          {(error && error.parkingCheckOut)?
+                          <h3>Invalid Parking Check-Out</h3>
+                          :null}
                         </label>
                       </div>
                       <div className="col-12 col-xl-2 p-0 pl-xl-3 my-3 my-xl-0">
