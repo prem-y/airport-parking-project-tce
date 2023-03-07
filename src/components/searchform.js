@@ -1,9 +1,13 @@
 import React from "react";
 import {useState} from "react";
+import moment from 'moment';
 const SearchForm =()=>{
+    const today = moment().format('YYYY-MM-DD').toString();
+    const tomorrow = moment().add(1,'days').format('YYYY-MM-DD').toString();
+    
     const [departureAirport,setDepartureAirport] = useState('');
-    const [parkingCheckIn,setparkingCheckIn] = useState('');
-    const [parkingCheckOut,setparkingCheckOut] = useState('');
+    const [parkingCheckIn,setparkingCheckIn] = useState(today);
+    const [parkingCheckOut,setparkingCheckOut] = useState(tomorrow);
 
     const [error,setError] = useState(
       {
@@ -16,9 +20,9 @@ const SearchForm =()=>{
     const departureAirportHandler=(e)=>{
       const {value} = e.target;
       setDepartureAirport(value);
-      if(e.target.value==null)
+      if(e.target.value)
       {
-        setError((err)=>({...err,departureAirport:false}))
+        setError((err)=>({...error,departureAirport:false}))
       }
     }
     const parkingCheckInHandler = (e)=>{
@@ -26,32 +30,59 @@ const SearchForm =()=>{
       setparkingCheckIn(value);
       if(e.target.value)
       {
-        setError((err)=>({...err,departureAirportHandler:false}))
+        setError((error) => ({ ...error, parkingCheckIn: false }));
+      }
+      if (moment(value) > moment(parkingCheckOut)) 
+      {
+        setError((error) => ({ ...error, parkingCheckIn: true }));
+      }
+      else
+      {
+        setError((error) => ({ ...error, parkingCheckIn: false }));
       }
     }
     const parkingCheckOutHandler = (e) =>{
       const {value} = e.target;
       setparkingCheckOut(value);
+      if(e.target.value)
+      {
+        setError((err) => ({ ...error, parkingCheckOut: false }));
+      }
+      if (moment(parkingCheckIn) > moment(value)) 
+      {
+        setError((err) => ({ ...error, parkingCheckOut: true }));
+      }
+      else
+      {
+        setError((err) => ({ ...error, parkingCheckOut: false }));
+      }
     }
 
     const onSubmitHandler = (e) =>{
       e.preventDefault();
-      if(departureAirport && parkingCheckIn && parkingCheckOut)
+      if (moment(parkingCheckIn) > moment(parkingCheckOut)) 
       {
-        alert('Form has been submitted successfully 👍')
+        setError((err) => ({ ...error, parkingCheckOut: true }))
       }
       else{
-        setError({
-          departureAirport: !departureAirport,
-          parkingCheckIn: !parkingCheckIn,
-          parkingCheckOut: !parkingCheckOut,
-        })
-        
+
+        if(departureAirport && parkingCheckIn && parkingCheckOut)
+        {
+          alert('Form has been submitted successfully 👍')
+        }
+        else{
+          setError({
+            departureAirport: !departureAirport,
+            parkingCheckIn: !parkingCheckIn,
+            parkingCheckOut: !parkingCheckOut,
+          })
       }
+        
       console.log('Data Entered:');
       console.log(departureAirport);
       console.log(parkingCheckIn);
       console.log(parkingCheckOut);
+      }
     }
     return(
         <section
@@ -107,7 +138,10 @@ const SearchForm =()=>{
                             value = {departureAirport}
                           />
                           {(error.departureAirport)?
-                          <h2>Invalid</h2>
+                          <div className="error">
+                            <h2>Invalid Departure Airport</h2>
+                          </div>
+                          
                           :null}
                         </div>{" "}
                         <i className="fas fa-map-marker-alt input-icon"></i>
