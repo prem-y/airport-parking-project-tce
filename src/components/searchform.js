@@ -62,7 +62,7 @@ const SearchForm =()=>{
       e.preventDefault();
       if (moment(parkingCheckIn) > moment(parkingCheckOut)) 
       {
-        setError((err) => ({ ...error, parkingCheckOut: true }))
+        setError((error) => ({ ...error, parkingCheckOut: true }))
       }
       else{
 
