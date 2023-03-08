@@ -2,13 +2,12 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import SearchForm from "./searchform";
+import { Link} from "react-router-dom";
 import "../App.css";
 function Homepage() {
   return (
     <>
       <div id="app" className="generic">
-        <Header/>
-
         <div className="content">
           <section id="home_page">
             <div className="years-of-service">
@@ -18,7 +17,7 @@ function Homepage() {
                 committed to serving you.
               </div>
             </div>
-            <SearchForm/>
+            <SearchForm />
             <section id="benefits">
               <div className="container">
                 <h5>What Can You Save with AirportParkingReservations.com?</h5>
@@ -75,7 +74,6 @@ function Homepage() {
             </section>
           </section>
         </div>
-        <Footer/>
       </div>
     </>
   );
