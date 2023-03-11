@@ -14,8 +14,8 @@ const SearchForm = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   const today = moment().format("YYYY-MM-DD").toString();
   const tomorrow = moment().add(1, "days").format("YYYY-MM-DD").toString();
