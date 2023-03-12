@@ -8,14 +8,14 @@ const SearchForm = () => {
   const [Loading, setLoading] = useState(false);
   const fetchData = async () => {
     setLoading(true);
-    const { data } = await axios.get("http://43.205.1.85:9009/v1/airports");
+    const { data } = await axios.get('http://43.205.1.85:9009/v1/airports');
     setLoading(false);
-    setRecords(data.result);
+    setRecords(data.results);
   };
 
   useEffect(() => {
     fetchData()
-  }, [])
+  },[])
 
   const today = moment().format("YYYY-MM-DD").toString();
   const tomorrow = moment().add(1, "days").format("YYYY-MM-DD").toString();
