@@ -3,19 +3,51 @@ import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import { useEffect } from "react";
+import AirportSuggetions from "./AirportSuggestions";
+import { useNavigate } from "react-router-dom";
 const SearchForm = () => {
+  const [airports, setAirports] = useState([]);
+  const [filteredAirports, setFilteredAirports] = useState("");
+
+  const navigate = useNavigate();
   const [records, setRecords] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(true);
   const fetchData = async () => {
     setLoading(true);
-    const { data } = await axios.get('http://43.205.1.85:9009/v1/airports');
+    const { data } = await axios.get("http://43.205.1.85:9009/v1/airports");
     setLoading(false);
     setRecords(data.results);
   };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    getAirport();
+  }, []);
+
+  const selectAirport = (value) => {
+    setDepartureAirport(value);
+    setFilteredAirports([]);
+  };
+
+  const getAirport = async () => {
+    try {
+      const { data, status } = await axios.get(
+        "http://43.205.1.85:9009/v1/airports"
+      );
+      if (status === 200 && data) {
+        setAirports(data?.results ?? []);
+      } else {
+        setAirports([]);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error.message);
+    }
+  };
 
   const today = moment().format("YYYY-MM-DD").toString();
   const tomorrow = moment().add(1, "days").format("YYYY-MM-DD").toString();
@@ -34,8 +66,15 @@ const SearchForm = () => {
     const { value } = e.target;
     setDepartureAirport(value);
     if (e.target.value) {
-      setError((err) => ({ ...error, departureAirport: false }));
+      setError((error) => ({ ...error, departureAirport: false }));
+    } else {
+      setError((error) => ({ ...error, departureAirport: true }));
     }
+    const filteredAirportsData = airports.filter((airport) =>
+      airport.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFilteredAirports(filteredAirportsData ?? []);
+    console.log(filteredAirports);
   };
   const parkingCheckInHandler = (e) => {
     const { value } = e.target;
@@ -68,6 +107,10 @@ const SearchForm = () => {
       setError((error) => ({ ...error, parkingCheckOut: true }));
     } else {
       if (departureAirport && parkingCheckIn && parkingCheckOut) {
+        navigate(
+          `/results?departureAirport=${departureAirport}&parkingCheckIn=${parkingCheckIn}&parkingCheckOut=${parkingCheckOut}`
+        );
+        //window.location.href = `/results?departureAirport=${departureAirport}&checkin=${parkingCheckIn}&checkout=${parkingCheckOut}`
         alert("Form has been submitted successfully 👍");
       } else {
         setError({
@@ -136,7 +179,7 @@ const SearchForm = () => {
                     onChange={departureAirportHandler}
                     value={departureAirport}
                   />
-                  {records.map((record, index) => {
+                  {/* {records.map((record, index) => {
                     const isEven = index % 2;
                     return (
                       <li
@@ -146,9 +189,12 @@ const SearchForm = () => {
                         {record.name}
                       </li>
                     );
-                  })}
+                  })} */}
                   {Loading ? <h1>Loading</h1> : null}
-
+                  <AirportSuggetions
+                    airports={filteredAirports}
+                    selectAirport={selectAirport}
+                  />
                   {error.departureAirport ? (
                     <div className="error">
                       <h2>Invalid Departure Airport</h2>

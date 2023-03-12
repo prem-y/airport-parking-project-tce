@@ -3,6 +3,7 @@ import "./App.css";
 import Homepage from "./components/Homepage";
 import Layout from "./components/Loyout";
 import Login from "./components/Login";
+import AirportAvailability from './components/AirportAvailability';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" index element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Homepage />} />
+            <Route path="results" element={<AirportAvailability />} />
           </Route>
         </Routes>
       </BrowserRouter>
