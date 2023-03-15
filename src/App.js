@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Homepage from "./components/Homepage";
+import Homepage from "./pages/Homepage";
 import Layout from "./components/Loyout";
-import Login from "./components/Login";
-import AirportAvailability from './components/AirportAvailability';
+import Login from "./pages/Login";
+import AirportAvailability from './pages/AirportAvailability';
 
 
 function App() {

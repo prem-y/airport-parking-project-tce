@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import SearchForm from "./searchform";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import SearchForm from "../components/searchform";
 import { Link} from "react-router-dom";
 import "../App.css";
 function Homepage() {
