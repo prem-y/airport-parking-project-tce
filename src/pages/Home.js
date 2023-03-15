@@ -258,7 +258,7 @@ const SearchForm = () => {
   );
 };
 
-function Homepage() {
+function Home() {
   return (
     <>
       <div id="app" className="generic">
@@ -337,4 +337,4 @@ function Homepage() {
   );
 }
 
-export default Homepage;
+export default Home;
