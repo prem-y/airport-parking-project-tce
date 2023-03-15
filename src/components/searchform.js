@@ -190,7 +190,7 @@ const SearchForm = () => {
                       </li>
                     );
                   })} */}
-                  {Loading ? <h1>Loading</h1> : null}
+                  {Loading ? <h1>loading..</h1> : null}
                   <AirportSuggetions
                     airports={filteredAirports}
                     selectAirport={selectAirport}
