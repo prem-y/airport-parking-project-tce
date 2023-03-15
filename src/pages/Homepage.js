@@ -108,10 +108,10 @@ const SearchForm = () => {
       setError((error) => ({ ...error, parkingCheckOut: true }));
     } else {
       if (departureAirport && parkingCheckIn && parkingCheckOut) {
-        navigate(
-          `/results?departureAirport=${departureAirport}&parkingCheckIn=${parkingCheckIn}&parkingCheckOut=${parkingCheckOut}`
-        );
-        //window.location.href = `/results?departureAirport=${departureAirport}&checkin=${parkingCheckIn}&checkout=${parkingCheckOut}`
+        // navigate(
+        //   `/results?departureAirport=${departureAirport}&parkingCheckIn=${parkingCheckIn}&parkingCheckOut=${parkingCheckOut}`
+        // );
+        window.location.href = `/results?departureAirport=${departureAirport}&checkin=${parkingCheckIn}&checkout=${parkingCheckOut}`
         alert("Form has been submitted successfully 👍");
       } else {
         setError({
