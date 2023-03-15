@@ -4,7 +4,7 @@ import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import { useEffect } from "react";
-import AirportSuggetions from "../components/AirportSuggestions";
+import AirportSuggetions from "../component/AirportSuggestions";
 import { useNavigate } from "react-router-dom";
 const SearchForm = () => {
   const [airports, setAirports] = useState([]);
