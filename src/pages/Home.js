@@ -4,7 +4,7 @@ import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import { useEffect } from "react";
-import AirportSuggetions from "../component/AirportSuggestions";
+import AirportSuggetions from "../components/AirportSuggestions";
 import { useNavigate } from "react-router-dom";
 const SearchForm = () => {
   const [airports, setAirports] = useState([]);
@@ -112,7 +112,6 @@ const SearchForm = () => {
         //   `/results?departureAirport=${departureAirport}&parkingCheckIn=${parkingCheckIn}&parkingCheckOut=${parkingCheckOut}`
         // );
         window.location.href = `/results?departureAirport=${departureAirport}&checkin=${parkingCheckIn}&checkout=${parkingCheckOut}`
-        alert("Form has been submitted successfully 👍");
       } else {
         setError({
           departureAirport: !departureAirport,
