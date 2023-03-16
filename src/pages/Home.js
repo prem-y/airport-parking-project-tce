@@ -5,7 +5,7 @@ import moment from "moment";
 import axios from "axios";
 import { useEffect } from "react";
 import AirportSuggetions from "../components/AirportSuggestions";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 const SearchForm = () => {
   const [airports, setAirports] = useState([]);
   const [filteredAirports, setFilteredAirports] = useState("");
@@ -210,7 +210,7 @@ const SearchForm = () => {
                     <input
                       name="checkin"
                       type="date"
-                      placeholder="Parking Check-Out"
+                      placeholder="Parking Check-In"
                       className="placeholder placeholder-airport"
                       style={{ width: "100%" }}
                       value={parkingCheckIn}
