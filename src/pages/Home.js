@@ -233,7 +233,7 @@ const SearchForm = () => {
                     onChange={parkingCheckOutHandler}
                   />
                   {error && error.parkingCheckOut ? (
-                    <h3>Invalid checkin Date</h3>
+                    <h3>Invalid checkout Date</h3>
                   ) : null}
                 </label>
               </div>
