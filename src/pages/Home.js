@@ -217,7 +217,7 @@ const SearchForm = () => {
                       onChange={parkingCheckInHandler}
                     />
                     {error && error.parkingCheckIn ? (
-                      <h3>Invalid Parking Check-In</h3>
+                      <h3>Invalid checkin Date</h3>
                     ) : null}
                   </div>
                 </label>{" "}
@@ -233,14 +233,11 @@ const SearchForm = () => {
                     onChange={parkingCheckOutHandler}
                   />
                   {error && error.parkingCheckOut ? (
-                    <h3>Invalid Parking Check-Out</h3>
+                    <h3>Invalid checkin Date</h3>
                   ) : null}
                 </label>
               </div>
               <div className="col-12 col-xl-2 p-0 pl-xl-3 my-3 my-xl-0">
-                <div className="d-none d-xl-block heading mb-1 invisible">
-                  Submit
-                </div>
                 <button
                   type="submit"
                   className="btn btn-secondary btn-big btn-block p-2"
