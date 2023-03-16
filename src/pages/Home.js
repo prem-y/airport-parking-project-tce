@@ -10,7 +10,7 @@ const SearchForm = () => {
   const [airports, setAirports] = useState([]);
   const [filteredAirports, setFilteredAirports] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [records, setRecords] = useState([]);
   const [Loading, setLoading] = useState(true);
   const fetchData = async () => {
